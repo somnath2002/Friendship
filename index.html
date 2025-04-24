@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Great Vibes', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
+    /* .heart {
+      width: 100px;
+      height: 90px;
+      position: relative;
+      animation: pulse 1.5s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 90px;
+      background: red;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 50px;
+    }
+
+    .heart-shape {
+      position: absolute;
+      top: 45px;
+      left: 25px;
+      width: 100px;
+      height: 100px;
+      background: red;
+      transform: rotate(45deg);
+      border-radius: 50%;
+    } */
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    .message {
+      margin-top: 40px;
+      font-size: 28px;
+      color: white;
+      font-weight: bold;
+      max-width: 90%;
+    }
+
+    .typewriter {
+      overflow: hidden;
+      border-right: .15em solid #fff;
+      white-space: nowrap;
+      animation: typing 4s steps(40, end), blink .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: white; }
+    }
+
+    .question {
+      margin-top: 50px;
+      font-size: 26px;
+      color: #fff;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .buttons button {
+      background-color: #fff;
+      color: #e6005c;
+      border: none;
+      padding: 14px 24px;
+      margin: 10px;
+      border-radius: 30px;
+      font-size: 22px;
+      font-family: 'Great Vibes', cursive;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .buttons button:hover {
+      background-color: #ffe6f2;
+    }
+
+    .response {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #fff;
+      display: none;
+    }
+
+    audio {
+      display: none;
+    }
+
+    .her-photo {
+      margin-top: 30px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    }
+
+    .bubble-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .bubble {
+      position: absolute;
+      background-color: rgba(255, 0, 64, 0.8);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 50px;
+      font-size: 18px;
+      white-space: nowrap;
+      animation: floatUp 6s linear forwards;
+      box-shadow: 0 0 10px rgba(255,0,0,0.6);
+      font-family: 'Great Vibes', cursive;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+    }
+    .signature {
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        color: white;
+        font-size: 22px;
+        font-family: 'Great Vibes', cursive;
+        opacity: 0.8;
+        z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="signature">– Somnath Tiwari</div>
+  <div class="overlay"></div>
+
+  <!-- Music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Heart -->
+  <div class="heart"></div>
+  <div class="heart-shape"></div>
+
+  <!-- Her Picture -->
+  <img class="her-photo" src="4c84f7ac-d045-42f4-8f98-b87c7b2f26ba.png" alt="It's You" />
+
+  <!-- Message -->
+  <div class="message">
+    <p class="typewriter" id="typedText"></p>
+  </div>
+
+  <!-- Friendship Question -->
+  <div class="question">
+    It's time to restart, What do you think? 🤝
+  </div>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <button onclick="showResponse('You just made my day! ❤️')">Yes</button>
+    <button onclick="showResponse('Yay! Let’s make new memories! 🌸')">Of course! 😄</button>
+  </div>
+
+  <!-- Response -->
+  <div class="response" id="responseMessage"></div>
+
+  <!-- Floating Bubbles -->
+  <div class="bubble-container" id="bubbleContainer"></div>
+
+  <script>
+    const herName = "Shikha"; // Change this to her name
+    const text = `Hey ${herName}... I know it's been a while, but I just wanted to say I miss you. 💖`;
+    const typedText = document.getElementById('typedText');
+    let index = 0;
+
+    function typeLetter() {
+      if (index < text.length) {
+        typedText.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeLetter, 60);
+      }
+    }
+
+    function showResponse(message) {
+      const response = document.getElementById('responseMessage');
+      response.textContent = message;
+      response.style.display = 'block';
+    }
+
+    // Emotion bubbles
+    const emotions = [
+      "I miss you 💔",
+      "You're special 🌟",
+      "Let’s begin again 🔄",
+      "Friendship means everything 💕",
+      "You matter to me 🫶",
+      "From my heart to yours 💌",
+      "Let’s write a new chapter 📖"
+    ];
+
+    function createBubble() {
+      const container = document.getElementById('bubbleContainer');
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.style.left = Math.random() * 80 + 'vw';
+      bubble.style.fontSize = (Math.random() * 6 + 18) + 'px';
+      bubble.textContent = emotions[Math.floor(Math.random() * emotions.length)];
+      container.appendChild(bubble);
+
+      setTimeout(() => {
+        container.removeChild(bubble);
+      }, 6000);
+    }
+
+    setInterval(createBubble, 2000);
+
+    window.onload = () => {
+      typeLetter();
+      document.getElementById("bg-music").volume = 0.4;
+    };
+  </script>
+</body>
+</html>
