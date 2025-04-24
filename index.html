@@ -85,6 +85,7 @@
       border-right: .15em solid #fff;
       white-space: nowrap;
       animation: typing 4s steps(40, end), blink .75s step-end infinite;
+      display: flex;
     }
 
     @keyframes typing {
@@ -96,6 +97,15 @@
       from, to { border-color: transparent }
       50% { border-color: white; }
     }
+
+    /* .container {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    } */
 
     .question {
       margin-top: 50px;
@@ -157,14 +167,14 @@
 
     .bubble {
       position: absolute;
-      background-color: rgba(255, 0, 64, 0.8);
+      background-color: rgba(251, 107, 191, 0.8);
       color: white;
       padding: 10px 14px;
       border-radius: 50px;
       font-size: 18px;
       white-space: nowrap;
       animation: floatUp 6s linear forwards;
-      box-shadow: 0 0 10px rgba(255,0,0,0.6);
+      box-shadow: 0 0 10px rgba(255, 242, 0, 0.6);
       font-family: 'Great Vibes', cursive;
     }
 
